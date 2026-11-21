@@ -91,7 +91,7 @@ El flujo es: la ventana llama al servicio, el servicio llama al DAO y el DAO hab
 3. Clonar el repositorio:
 
 ```
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
+git clone https://github.com/CarlosAriza3103/inventario-videojuegos.git
 cd TU_REPOSITORIO
 ```
 
