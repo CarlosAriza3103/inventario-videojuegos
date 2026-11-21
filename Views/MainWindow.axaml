@@ -1,0 +1,111 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="InventarioVideojuegos.Views.MainWindow"
+        Title="Inventario de Videojuegos"
+        Width="1050" Height="640"
+        MinWidth="900" MinHeight="560"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Encabezado -->
+        <Border Grid.Row="0" Background="#1F2A44" Padding="20,14">
+            <StackPanel>
+                <TextBlock Text="Inventario de Videojuegos" FontSize="22" FontWeight="Bold" Foreground="White" />
+                <TextBlock Text="Registra, consulta, modifica y elimina los juegos de tu colección"
+                           FontSize="12" Foreground="#C9D3EA" Margin="0,2,0,0" />
+            </StackPanel>
+        </Border>
+
+        <!-- Contenido principal -->
+        <Grid Grid.Row="1" ColumnDefinitions="330,*" Margin="16">
+
+            <!-- Formulario -->
+            <Border Grid.Column="0" Background="#F5F7FB" CornerRadius="8" Padding="16" Margin="0,0,16,0">
+                <ScrollViewer>
+                    <StackPanel Spacing="6">
+                        <TextBlock Text="Datos del videojuego" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,6" />
+
+                        <TextBlock Text="Título" />
+                        <TextBox x:Name="TxtTitulo" Watermark="Ej. The Legend of Zelda" MaxLength="100" />
+
+                        <TextBlock Text="Plataforma" Margin="0,6,0,0" />
+                        <ComboBox x:Name="CmbPlataforma" HorizontalAlignment="Stretch" PlaceholderText="Selecciona..." />
+
+                        <TextBlock Text="Género" Margin="0,6,0,0" />
+                        <ComboBox x:Name="CmbGenero" HorizontalAlignment="Stretch" PlaceholderText="Selecciona..." />
+
+                        <Grid ColumnDefinitions="*,12,*,12,*" Margin="0,6,0,0">
+                            <StackPanel Grid.Column="0" Spacing="6">
+                                <TextBlock Text="Año" />
+                                <TextBox x:Name="TxtAnio" Watermark="2023" MaxLength="4" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Spacing="6">
+                                <TextBlock Text="Precio" />
+                                <TextBox x:Name="TxtPrecio" Watermark="59.99" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="4" Spacing="6">
+                                <TextBlock Text="Cantidad" />
+                                <TextBox x:Name="TxtCantidad" Watermark="1" MaxLength="5" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Button x:Name="BtnGuardar" Content="Agregar videojuego" Click="BtnGuardar_Click"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="#2E7D32" Foreground="White" Margin="0,16,0,0" />
+                        <Button x:Name="BtnActualizar" Content="Guardar cambios" Click="BtnActualizar_Click"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="#1565C0" Foreground="White" IsEnabled="False" />
+                        <Button x:Name="BtnEliminar" Content="Eliminar seleccionado" Click="BtnEliminar_Click"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="#C62828" Foreground="White" IsEnabled="False" />
+                        <Button x:Name="BtnLimpiar" Content="Limpiar formulario" Click="BtnLimpiar_Click"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
+
+                        <TextBlock Text="Selecciona una fila de la tabla para modificarla o eliminarla."
+                                   FontSize="11" Foreground="#6B7280" TextWrapping="Wrap" Margin="0,10,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Búsqueda y tabla -->
+            <Grid Grid.Column="1" RowDefinitions="Auto,*">
+                <Grid Grid.Row="0" ColumnDefinitions="*,8,Auto,8,Auto" Margin="0,0,0,10">
+                    <TextBox x:Name="TxtBuscar" Grid.Column="0"
+                             Watermark="Buscar por título, plataforma o género..."
+                             KeyDown="TxtBuscar_KeyDown" />
+                    <Button x:Name="BtnBuscar" Grid.Column="2" Content="Buscar" Click="BtnBuscar_Click" />
+                    <Button x:Name="BtnMostrarTodo" Grid.Column="4" Content="Mostrar todo" Click="BtnMostrarTodo_Click" />
+                </Grid>
+
+                <DataGrid x:Name="GridJuegos" Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          GridLinesVisibility="Horizontal"
+                          CanUserSortColumns="True"
+                          CanUserResizeColumns="True"
+                          SelectionChanged="GridJuegos_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="55" />
+                        <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*" />
+                        <DataGridTextColumn Header="Plataforma" Binding="{Binding Plataforma}" Width="130" />
+                        <DataGridTextColumn Header="Género" Binding="{Binding Genero}" Width="100" />
+                        <DataGridTextColumn Header="Año" Binding="{Binding Anio}" Width="65" />
+                        <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat={}{0:N2}}" Width="85" />
+                        <DataGridTextColumn Header="Cant." Binding="{Binding Cantidad}" Width="65" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+        <!-- Barra de estado -->
+        <Border Grid.Row="2" Background="#EEF1F7" Padding="16,8">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock x:Name="TxtEstado" Grid.Column="0" Text="Listo." VerticalAlignment="Center" />
+                <TextBlock x:Name="TxtResumen" Grid.Column="1" FontWeight="SemiBold" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>

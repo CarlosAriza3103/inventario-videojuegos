@@ -1,0 +1,19 @@
+# Carpetas de compilación
+bin/
+obj/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Bases de datos locales generadas al ejecutar
+*.db
+*.db-shm
+*.db-wal
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
